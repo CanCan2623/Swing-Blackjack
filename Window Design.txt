@@ -1,0 +1,21 @@
+Main Window
+    -> Main Panel
+        -> Dealer's panel
+            -> Card panel - done
+            -> Card panel - done
+            -> Card panel - done
+            -> Card panel - done
+            -> Card panel - done
+        -> User's panel
+            -> Card panel - done
+            -> Card panel - done
+            -> Card panel - done
+            -> Card panel - done
+            -> Card panel - done
+        -> Status panel
+            -> User's score
+            -> "Hit or Stand?" message
+        -> Controls panel
+            -> "Hit!" button
+            -> "Stand" button
+            -> "New Game" button
