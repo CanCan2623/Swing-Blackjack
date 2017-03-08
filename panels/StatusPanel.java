@@ -1,6 +1,5 @@
 package panels;
 
-/* State information */
 import states.GameStates;
 import states.StatePanel;
 
@@ -8,12 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Victor on 23-Dec-15.
- *
  * This panel displays information about the user's status. It gets this information from the main container panel.
  */
 public class StatusPanel extends JPanel implements StatePanel{
-    /* Subcomponents */
+    /* UI Components */
     JLabel scoreLabel; // The label which displays the user's score.
     JLabel promptLabel; // The user prompt
     JLabel moneyLabel; // The label which displays the amount of money which the user has
@@ -28,29 +25,30 @@ public class StatusPanel extends JPanel implements StatePanel{
         /** Create labels **/
 
         /* Create the score label */
-        scoreLabel = new JLabel("Score: "); // Create the label with no score text
-        scoreLabel.setForeground(Color.WHITE); // White label to stand out
-        scoreLabel.setFont(new Font("Times New Roman", Font.BOLD, 20)); // Times New Roman, Bold, 20pt
+        scoreLabel = new JLabel("Score: ");
+        scoreLabel.setForeground(Color.WHITE); 
+        scoreLabel.setFont(new Font("Times New Roman", Font.BOLD, 20)); 
 
         /* Create the prompt label */
-        promptLabel = new JLabel("Hit or Stand?"); // Label which asks the user what they'd like to do
-        promptLabel.setForeground(Color.WHITE); // White label to stand out
-        promptLabel.setFont(new Font("Times New Roman", Font.BOLD, 20)); // Times New Roman, Bold, 20pt
+        promptLabel = new JLabel("Hit or Stand?");
+        promptLabel.setForeground(Color.WHITE); 
+        promptLabel.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
         /* Create the money label */
-        moneyLabel = new JLabel("Your Holdings: $" + Integer.toString(money)); // The label which displays the amount of money in the user's pot
-        moneyLabel.setForeground(Color.WHITE); // White label to stand out
-        moneyLabel.setFont(new Font("Times New Roman", Font.BOLD, 20)); // Times New Roman, Bold, 20pt
+        moneyLabel = new JLabel("Your Holdings: $" + Integer.toString(money));
+        moneyLabel.setForeground(Color.WHITE); 
+        moneyLabel.setFont(new Font("Times New Roman", Font.BOLD, 20)); 
 
-        /* Graphics stuff */
+        /* Sets the GUI's layout and background colour */
         setLayout(new GridLayout(3, 1)); // 3 row, 1 column layout
         setBackground(new Color(19, 168, 66)); // Use a dark green background
 
         /* Add components to the panel */
-        add(scoreLabel); // Add the score label to the panel
-        add(promptLabel); // Add the prompt label to the panel
-        add(moneyLabel); // Add the label which displays the amount of money held by the user to the panel
+        add(scoreLabel); 
+        add(promptLabel); 
+        add(moneyLabel);
 
+        
         curStat = GameStates.BEFORESTART; // Set the state to the state before a game starts
         updatePanel(curStat); // Update the panel with the initial status
     }
@@ -62,7 +60,7 @@ public class StatusPanel extends JPanel implements StatePanel{
     @Override
     public GameStates getState()
     {
-        return curStat; // Return the current state
+        return curStat;
     }
 
     /**
@@ -72,18 +70,20 @@ public class StatusPanel extends JPanel implements StatePanel{
      */
     public void updatePanel(GameStates gs, int score)
     {
-        switch (gs) // Perform different actions, depending on the state
+        // checks if the player has won or lost the hand, resets the scoreLabel
+        // to a default value, and updates the palyer's money 
+        switch (gs)
         {
             case ULOSE: // The user has lost
             {
-                scoreLabel.setText("Score: "); // Reset the score label
-                money -= bet; // Subtract the bet from the user's total
-                moneyLabel.setText("Your Holdings: $" + Integer.toString(money)); // Update the money label
+                scoreLabel.setText("Score: "); 
+                money -= bet;
+                moneyLabel.setText("Your Holdings: $" + Integer.toString(money));
 
-                if (money == 0) // User has lost
+                if (money == 0) // Game over
                 {
                     JOptionPane.showMessageDialog(this,"Your holdings have reached $0, so you can't play any longer", "No Holdings", JOptionPane.PLAIN_MESSAGE);
-                    System.exit(0); // Exitz
+                    System.exit(0);
                 }
 
                 break;
@@ -91,15 +91,15 @@ public class StatusPanel extends JPanel implements StatePanel{
 
             case UWIN: // The user has won
             {
-                scoreLabel.setText("Score: "); // Reset the score label
-                money += bet; // Add the bet to the user's total
-                moneyLabel.setText("Your Holdings: $" + Integer.toString(money)); // Update the money label
+                scoreLabel.setText("Score: ");
+                money += bet;
+                moneyLabel.setText("Your Holdings: $" + Integer.toString(money));
                 break;
             }
 
             default:
             {
-                scoreLabel.setText("Score: " + Integer.toString(score)); // Clear the label by resetting it so that it doesn't show any score
+                scoreLabel.setText("Score: " + Integer.toString(score));
                 break;
             }
         }
@@ -120,7 +120,7 @@ public class StatusPanel extends JPanel implements StatePanel{
      */
     public int getMoney()
     {
-        return money; // Return the amount of money which the user has
+        return money; 
     }
 
     /**
@@ -130,6 +130,6 @@ public class StatusPanel extends JPanel implements StatePanel{
      */
     public void setBet(int newBetValue)
     {
-        bet = newBetValue; // Store the new bet value
+        bet = newBetValue;
     }
 }

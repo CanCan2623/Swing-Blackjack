@@ -1,8 +1,6 @@
 package states;
 
 /**
- * Created by Victor on 22-Dec-15.
- *
  * This enumeration contains the possible states of the game. This is used to determine how to draw the various panels.
  */
 public enum GameStates {
@@ -15,6 +13,9 @@ public enum GameStates {
                 * 2) Clear the panel which displays the user's points. - done
                 * 3) Wait for the user to click "New Game". When they do so, goto GAMESTART.
                 **/
+
+
+
     GAMESTART,   /**
                 * In this state, 2 cards are dealt into each player's hand.
                 * Both of the user's cards are dealt face-up.
@@ -27,6 +28,9 @@ public enum GameStates {
                 * Else if value(userHand) == 21, user wins. Goto UWIN state.
                 * Else goto UADD state
                 **/
+
+
+
     UADD, /**
             * State in which the user gets a chance to add cards to their hand.
             *
@@ -42,6 +46,9 @@ public enum GameStates {
             * which is handled by Java and the event listeners. Therefore, after the GAMESTART state is handled, we simply need to wait for a click
             * on a button.
             **/
+
+
+
     UHIT, /**
             * State in which the user hits.
             *
@@ -51,6 +58,9 @@ public enum GameStates {
             * 2) Check if the value of the user's hand has gone over 21. If yes, goto ULOSE state.
             * 3) If the value of the user's hand isn't > 21, check the number of cards in the hand. If numCardsInHand == 5, goto UWIN. Else, goto UADD.
             **/
+
+
+
     USTAND, /**
             * State in which the user has decided to Stand.
             *
@@ -64,6 +74,9 @@ public enum GameStates {
             * 4) Else if dealerHand.value() >= userHand.value(), goto ULOSE state.
             * 5) Else, user wins. GOTO UWIN state.
             **/
+
+
+
     UWIN,   /**
             *   State in which the user wins.
             *
@@ -72,6 +85,9 @@ public enum GameStates {
             *  1) Display "You Win!" message.
             *  2) Goto BEFORESTART state.
             **/
+
+
+
     ULOSE,   /**
             * State in which the user loses.
             *

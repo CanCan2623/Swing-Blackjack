@@ -1,11 +1,9 @@
 package listeners;
 
-/* Panels */
 import panels.BlackJackPanel;
 import panels.ControlPanel;
 import panels.StatusPanel;
 
-/* States */
 import states.GameStates;
 
 import javax.swing.*;
@@ -13,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Victor on 23-Dec-15.
- *
  * This class defines the object which listens for events on the "New Game" button.
  */
 public class NewGameButtonListener implements ActionListener {
@@ -25,26 +21,27 @@ public class NewGameButtonListener implements ActionListener {
      */
     public void actionPerformed(ActionEvent e)
     {
-        JButton but = (JButton)e.getSource(); // Get the button which dispatched the event
-        ControlPanel cp = (ControlPanel)but.getParent(); // Get the control panel which contains the button
-        BlackJackPanel bp = (BlackJackPanel)cp.getParent(); // Get the main panel which contains the control panel
-        String uBet = cp.getBetTextFieldValue(); // Get the user-entered bet
-        int uBetI; // The integer value of the user's bet
-        StatusPanel sp = bp.getSp(); // Get the status panel for later use
+        // this method gets the blackjack panel and status panel through what-
+        // ever button created the event, and then get the user's bet
+        JButton but = (JButton)e.getSource();
+        ControlPanel cp = (ControlPanel)but.getParent();
+        BlackJackPanel bp = (BlackJackPanel)cp.getParent();
+        String uBet = cp.getBetTextFieldValue();
+        int uBetI;
+        StatusPanel sp = bp.getSp();
 
         /* Validate the bet input */
-
-        if (isValidInt(uBet)) // The bet is a valid integer
+        // checks if bet is a positive integer, and that the user has enough 
+        // money to make the bet
+        if (isValidInt(uBet)) 
         {
-            uBetI = Integer.parseInt(uBet); // Store the integer representation of the bet
+            uBetI = Integer.parseInt(uBet); 
 
-            if (uBetI > 0) // The bet is a valid dollar amount
+            if (uBetI > 0)
             {
-                if (uBetI <= sp.getMoney()) // The user hasn't tried to bet more money than they have
+                if (uBetI <= sp.getMoney()) 
                 {
-                    // Everything is OK - the bet is a valid integer, it is a valid dollar amount, and it isn't more money than they have
-
-                    /* Handle the "New Game" event */
+                    /* Handle the "New Game" (new hand) event */
                     sp.setBet(uBetI); // Set the bet in the status panel
                     bp.updatePanel(GameStates.GAMESTART); // Send a "start game" message to the main panel
                 }
@@ -76,13 +73,13 @@ public class NewGameButtonListener implements ActionListener {
     {
         try
         {
-            Integer.parseInt(toCheck); // Try to parse the string as an integer
-            return true; // If we got here, the string was successfully parsed as an integer
+            Integer.parseInt(toCheck); 
+            return true;
         }
 
-        catch (NumberFormatException nfe) // The string could not be parsed as an integer
+        catch (NumberFormatException nfe) 
         {
-            return false; // Invalid integer
+            return false;
         }
     }
 }

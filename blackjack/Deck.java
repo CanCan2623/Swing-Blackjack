@@ -1,4 +1,4 @@
-package blackjack; // Package containing BlackJack game definition classes
+package blackjack;
 
 /**
  *  An object of type Deck represents a deck of playing cards.  The deck
@@ -26,7 +26,7 @@ public class Deck {
      * to "new Deck(false)".)
      */
     public Deck() {
-        this(false);  // Just call the other constructor in this class.
+        this(false);
     }
 
     /**
@@ -58,8 +58,8 @@ public class Deck {
     }
 
     /**
-     * Put all the used cards back into the deck (if any), and
-     * shuffle the deck into a random order.
+     * Put all the used cards back into the deck (if any have been removed), 
+     * and shuffles the deck into a random order.
      */
     public void shuffle() {
         for ( int i = deck.length-1; i > 0; i-- ) {
@@ -110,4 +110,4 @@ public class Deck {
         return (deck.length == 54);
     }
 
-} // end class Deck
+}

@@ -1,11 +1,9 @@
-package panels; // This class is a panel, and as such is a member of the panels package
+package panels; 
 
-/* Event listeners */
 import listeners.NewGameButtonListener;
 import listeners.HitButtonListener;
 import listeners.StandButtonListener;
 
-/* Classes which define game states */
 import states.GameStates;
 import states.StatePanel;
 
@@ -13,17 +11,15 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Victor on 23-Dec-15.
- *
  * This class defines the panel which contains the user's controls (buttons).
  */
 public class ControlPanel extends JPanel implements StatePanel {
 
     /* Controls */
-    JButton newGameButton; // The button which the user clicks to start a new game
-    JButton hitButton; // The button which the user clicks when they want to hit
-    JButton standButton; // The button which the user clicks when they want to stand
-    JTextField betField; // The field into which the user types their bet
+    JButton newGameButton;
+    JButton hitButton;
+    JButton standButton;
+    JTextField betField;
 
     /* Event listeners */
     NewGameButtonListener ngbl; // The listener for the "New Game" button
@@ -44,36 +40,36 @@ public class ControlPanel extends JPanel implements StatePanel {
         /** Build the inputs **/
 
         /* Build the "New Game" button */
-        newGameButton = new JButton("New Game"); // Create the button
-        ngbl = new NewGameButtonListener(); // Create the button's listener
-        newGameButton.addActionListener(ngbl); // Add the listener to the button
+        newGameButton = new JButton("New Game");
+        ngbl = new NewGameButtonListener();
+        newGameButton.addActionListener(ngbl);
         newGameButton.setToolTipText("Start a new game");
 
         /* Build the "Hit!" button */
-        hitButton = new JButton("Hit!"); // Create the button
-        hbl = new HitButtonListener(); // Create the button's listener
-        hitButton.addActionListener(hbl); // Add the listener to the button
+        hitButton = new JButton("Hit!"); 
+        hbl = new HitButtonListener(); 
+        hitButton.addActionListener(hbl); 
         hitButton.setToolTipText("Take a card from the deck.");
 
         /* Build the "Stand" button */
-        standButton = new JButton("Stand"); // Create the button
-        sbl = new StandButtonListener(); // Create the button's listener
-        standButton.addActionListener(sbl); // Add the listener to the button
+        standButton = new JButton("Stand"); 
+        sbl = new StandButtonListener(); 
+        standButton.addActionListener(sbl); 
         standButton.setToolTipText("End the game and see who wins");
 
         /* Build the bet text field */
-        betField = new JTextField(); // Create the text field
-        betField.setToolTipText("Enter the amount of money which you wish to bet on this game here."); // Set some tool tip text on the field
+        betField = new JTextField(); 
+        betField.setToolTipText("Enter the amount of money which you wish to bet on this game here.");
 
         /** Add the buttons to the panel **/
-        add(newGameButton); // Add the "New Game" button to the panel
-        add(hitButton); // Add the "Hit!" button to the panel
-        add(standButton); // Add the "Stand" button to the panel
-        add(betField); // Add the bet text field to the panel
+        add(newGameButton); 
+        add(hitButton); 
+        add(standButton); 
+        add(betField); 
 
         /* Handle the initial state of the game */
-        curStat = GameStates.BEFORESTART; // State before a game states
-        updatePanel(curStat); // Update the panel with the new state
+        curStat = GameStates.BEFORESTART; 
+        updatePanel(curStat); 
     }
 
     /**
@@ -82,31 +78,34 @@ public class ControlPanel extends JPanel implements StatePanel {
      */
     public void updatePanel(GameStates gameStates)
     {
-        curStat = gameStates; // Save the new state
+        curStat = gameStates; 
 
-        switch (curStat) // Draw the panel differently, depending on the game's state
+        switch (curStat) 
         {
-            case BEFORESTART: // While waiting for the player to click the "New Game" button
+            case BEFORESTART: 
             {
-                newGameButton.setEnabled(true); // Enable the "New Game" button
-                hitButton.setEnabled(false); // Disable the "Hit" button
-                standButton.setEnabled(false); // Disable the "Stand" button
-                betField.setEnabled(true); // Enable the bet value field
+                // Before the game starts, eable the "New Game" button and bet
+                // value field, but disable the "Hit" and "Stand" buttons
+                newGameButton.setEnabled(true);
+                hitButton.setEnabled(false);
+                standButton.setEnabled(false);
+                betField.setEnabled(true);
                 break;
             }
 
-            case GAMESTART: // Start of the game - disable the "New Game" button and enable the "Hit" and "Stand" buttons
+            case GAMESTART:
             {
-                newGameButton.setEnabled(false); // Disable the "New Game" button
-                hitButton.setEnabled(true); // Enable the "Hit" button
-                standButton.setEnabled(true); // Enable the "Stand" button
-                betField.setEnabled(false); // Disable the bet value field
+                // When the game starts, disable the "New Game" button and bet
+                // value field, but enable the "Hit" and "Stand" buttons
+                newGameButton.setEnabled(false); 
+                hitButton.setEnabled(true);
+                standButton.setEnabled(true); 
+                betField.setEnabled(false); 
                 break;
             }
 
             default:
             {
-                //System.out.println("ControlPanel: curStat = " + curStat);
                 break;
             }
         }
@@ -118,7 +117,7 @@ public class ControlPanel extends JPanel implements StatePanel {
      */
     public GameStates getState()
     {
-        return curStat; // Return the current state
+        return curStat; 
     }
 
     /**
@@ -128,7 +127,7 @@ public class ControlPanel extends JPanel implements StatePanel {
      */
     public void updatePanel(GameStates gs, int score)
     {
-        updatePanel(gs); // Update the panel
+        updatePanel(gs);
     }
 
     /**
@@ -137,6 +136,6 @@ public class ControlPanel extends JPanel implements StatePanel {
      */
     public String getBetTextFieldValue()
     {
-        return betField.getText(); // Return the text in the bet field
+        return betField.getText(); 
     }
 }
