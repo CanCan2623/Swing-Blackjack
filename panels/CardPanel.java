@@ -1,34 +1,30 @@
 package panels;
 
-/* Swing imports */
 import javax.swing.*;
 import java.awt.*;
 
-/* Blackjack imports */
-import blackjack.Card; // The class which defines a playing card
+import blackjack.Card; 
 
 /**
- * Created by Victor on 23-Dec-15.
- *
  * This class displays a card.
  */
 public class CardPanel extends JPanel {
 
     Card curCard = null; // The card to draw
-    JLabel cardNumLabel; // The label which displays the number of the card
-    JLabel ofLabel; // The label which displays the word "of"
-    JLabel cardSuitLabel; // The label which displays the card's suit
+    JLabel cardNumLabel; // displays the number of the card
+    JLabel ofLabel;      // displays the word "of"
+    JLabel cardSuitLabel; // displays the card's suit
     boolean cardShowing = true; // Whether or not the card should be shown
 
     /**
-     * Constructor.
+     * Creates a new card and sets its look
      */
     public CardPanel()
     {
         /* Set the labels to show default text */
-        cardNumLabel = new JLabel(); // Create the JLabel, with no text
-        ofLabel = new JLabel(); // Create the JLabel, with no text
-        cardSuitLabel = new JLabel(); // Create the JLabel with no text
+        cardNumLabel = new JLabel(); 
+        ofLabel = new JLabel(); 
+        cardSuitLabel = new JLabel(); 
 
         /* Window appearance and layout */
         setBackground(new Color(255, 255, 255)); // Set a white background
@@ -46,7 +42,7 @@ public class CardPanel extends JPanel {
      */
     public void setCurCard(Card c)
     {
-        curCard = c; // Store a reference to the current card
+        curCard = c; 
     }
 
     /**
@@ -55,13 +51,13 @@ public class CardPanel extends JPanel {
     public void reset()
     {
         /* Clear the labels */
-        cardNumLabel.setText(""); // Clear the number label
-        cardSuitLabel.setText(""); // Clear the suit label
-        ofLabel.setText(""); // Clear the "of" label
+        cardNumLabel.setText(""); 
+        cardSuitLabel.setText(""); 
+        ofLabel.setText("");
 
         /* Clear the card variables */
-        curCard = null; // Remove the current card
-        cardShowing = true; // Reset the boolean to its default value
+        curCard = null; 
+        cardShowing = true; // default value
     }
 
     /**
@@ -71,41 +67,42 @@ public class CardPanel extends JPanel {
      */
     public void setVisibility(boolean isVisible)
     {
-        cardShowing = isVisible; // Store the controlling boolean value for use by drawCard.
+        cardShowing = isVisible;
     }
 
+    /**
+     * Adds text to card that is to be displayed
+     */
     public void drawCard()
     {
-        String suit; // The suit of the card
-        String val; // The value of the card
+        String suit; 
+        String val;
 
         /* Only show the card's information if it should be */
-        if (cardShowing && curCard != null) // The card should be shown, and we have a card assigned to us
+        if (cardShowing && curCard != null)
         {
-            suit = curCard.getSuitAsString(); // Store the card's suit
-            val = curCard.getValueAsString(); // Store the card's value
+            suit = curCard.getSuitAsString(); 
+            val = curCard.getValueAsString(); 
 
             /* Set the labels to display the appropriate values */
-            cardNumLabel.setText(val); // Display the card's value
-            cardSuitLabel.setText(suit); // Display the card's suit
-            ofLabel.setText("of"); // Display the word "of"
+            cardNumLabel.setText(val); 
+            cardSuitLabel.setText(suit); 
+            ofLabel.setText("of"); 
 
             /* Determine what colour to display the labels as */
 
-            if (suit.toLowerCase().equals("diamonds") || suit.toLowerCase().equals("hearts")) // Red suits
+            if (suit.toLowerCase().equals("diamonds") || suit.toLowerCase().equals("hearts")) 
             {
-                /* Make the labels red */
-                cardNumLabel.setForeground(Color.RED); // Make the card number label red
-                cardSuitLabel.setForeground(Color.RED); // Make the card suit label red
-                ofLabel.setForeground(Color.RED); // Make the "of" label red
+                cardNumLabel.setForeground(Color.RED); 
+                cardSuitLabel.setForeground(Color.RED); 
+                ofLabel.setForeground(Color.RED); 
             }
 
-            else // Black suits
+            else 
             {
-                 /* Make the labels black */
-                cardNumLabel.setForeground(Color.BLACK); // Make the card number label black
-                cardSuitLabel.setForeground(Color.BLACK); // Make the card suit label black
-                ofLabel.setForeground(Color.BLACK); // Make the "of" label black
+                cardNumLabel.setForeground(Color.BLACK); 
+                cardSuitLabel.setForeground(Color.BLACK);
+                ofLabel.setForeground(Color.BLACK);
             }
         }
 

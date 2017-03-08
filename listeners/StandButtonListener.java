@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Victor on 23-Dec-15.
- *
  * This class listens for and handles click events dispatched by the "Stand" button
  */
 public class StandButtonListener implements ActionListener {
@@ -22,11 +20,12 @@ public class StandButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        JButton standButton = (JButton)e.getSource(); // Get the button's source
-        ControlPanel cp = (ControlPanel)standButton.getParent(); // Get the ControlPanel which contains the button
-        BlackJackPanel bp = (BlackJackPanel)cp.getParent(); // Get the BlackJackPanel whcih contains the ControlPanel
+        // This method get the blackjack panel of the button that generated the
+        // event, and uses the panel to resond if a player decides to "stand"
+        JButton standButton = (JButton)e.getSource();
+        ControlPanel cp = (ControlPanel)standButton.getParent();
+        BlackJackPanel bp = (BlackJackPanel)cp.getParent(); 
 
-        /* Update the panel with a "Stand" message */
-        bp.updatePanel(GameStates.USTAND); // Send a "USTAND" message to the main panel
+        bp.updatePanel(GameStates.USTAND);
     }
 }

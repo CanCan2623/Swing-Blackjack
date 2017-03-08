@@ -1,12 +1,7 @@
-/* Panels */
 import panels.BlackJackPanel;
-
-/* Java imports */
 import javax.swing.*;
 
 /**
- * Created by Victor on 22-Dec-15.
- *
  * The main class of the programs. Creates the window and runs the program.
  */
 public class BlackJackGUIMain implements Runnable {
@@ -19,8 +14,8 @@ public class BlackJackGUIMain implements Runnable {
         } catch (Exception e) {
             System.out.println("Unable to apply OS theme to GUI.  Switching to default Java.");
         }
-
-        SwingUtilities.invokeLater(new BlackJackGUIMain()); // Add the program to the queue to be started later
+        // Add the program to the queue to be started later
+        SwingUtilities.invokeLater(new BlackJackGUIMain()); 
     }
 
     /**
@@ -28,11 +23,11 @@ public class BlackJackGUIMain implements Runnable {
      */
     public void run()
     {
-        JFrame blackJackWindow = new JFrame("Victor's Game of BlackJack"); // Create the main window
-        BlackJackPanel blackJackPanel = new BlackJackPanel(); // Create the main panel
+        JFrame blackJackWindow = new JFrame("Victor's Game of BlackJack");
+        BlackJackPanel blackJackPanel = new BlackJackPanel();
 
         /* Window setup and display */
-        blackJackWindow.setContentPane(blackJackPanel); // Add the main panel to the window
+        blackJackWindow.setContentPane(blackJackPanel);
         blackJackWindow.setLocation(120, 70);
         blackJackWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         blackJackWindow.setSize(5000, 5000);

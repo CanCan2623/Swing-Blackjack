@@ -1,8 +1,6 @@
 package panels;
 
 /**
- * Created by Victor on 24-Dec-15.
- *
  * This interface defines the methods that a panel must implement if it is to be considered a panel which draws the hand of a player in the game.
  */
 public interface PlayerPanel {

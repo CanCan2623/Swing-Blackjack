@@ -1,4 +1,4 @@
-package blackjack; // Package containing BlackJack game definition classes
+package blackjack;
 
 /**
  * An object of type Card represents a playing card from a
@@ -12,35 +12,34 @@ package blackjack; // Package containing BlackJack game definition classes
  */
 public class Card {
 
-    public final static int SPADES = 0;   // Codes for the 4 suits, plus Joker.
+    // It is easier for our purposes to represent the suit of a card as a
+    // number, as it's easier to do comparisons on an int compared to a string
+    public final static int SPADES = 0;
     public final static int HEARTS = 1;
     public final static int DIAMONDS = 2;
     public final static int CLUBS = 3;
     public final static int JOKER = 4;
 
-    public final static int ACE = 1;      // Codes for the non-numeric cards.
-    public final static int JACK = 11;    //   Cards 2 through 10 have their 
-    public final static int QUEEN = 12;   //   numerical values for their codes.
+    // As the majority of cards in a deck have a number value, we continue this
+    // trend by assigning the face (king, queen, jack, ace) cards a numberic 
+    // value
+    public final static int ACE = 1;
+    public final static int JACK = 11;
+    public final static int QUEEN = 12;
     public final static int KING = 13;
 
-    /**
-     * This card's suit, one of the constants SPADES, HEARTS, DIAMONDS,
-     * CLUBS, or JOKER.  The suit cannot be changed after the card is
-     * constructed.
-     */
-    private final int suit; 
-
-    /**
-     * The card's value.  For a normal card, this is one of the values
-     * 1 through 13, with 1 representing ACE.  For a JOKER, the value
-     * can be anything.  The value cannot be changed after the card
-     * is constructed.
-     */
+    // The value of the suit must be 0-4 (inclusive), as a traditional deck of
+    // cards only contain the suites listed above
+    private final int suit;
+    // The value must be between 1-13, representing its numeric value or
+    // that it is a face card
     private final int value;
 
     /**
-     * Creates a Joker, with 1 as the associated value.  (Note that
-     * "new Card()" is equivalent to "new Card(1,Card.JOKER)".)
+     * Default constructor creates a joker with an arbitrary value of 1.  We
+     * have chosen to generate a joker as the default since a joker is
+     * generally viewd as a "wild card", and a new card with no parameters
+     * fits this motif
      */
     public Card() {
         suit = JOKER;
@@ -49,11 +48,10 @@ public class Card {
 
     /**
      * Creates a card with a specified suit and value.
-     * @param theValue the value of the new card.  For a regular card (non-joker),
-     * the value must be in the range 1 through 13, with 1 representing an Ace.
-     * You can use the constants Card.ACE, Card.JACK, Card.QUEEN, and Card.KING.  
-     * For a Joker, the value can be anything.
-     * @param theSuit the suit of the new card.  This must be one of the values
+     * @param theValue the value of the new card.  The value must be in the 
+     * range 1 through 13 (1, 11, 12, and 13 can be replaced with Card.ACE, 
+     * Card.JACK, Card.Queen, and Card.KING for better readability)
+     * @param the Suit the suit of the new card.  This must be one of the values
      * Card.SPADES, Card.HEARTS, Card.DIAMONDS, Card.CLUBS, or Card.JOKER.
      * @throws IllegalArgumentException if the parameter values are not in the
      * permissible ranges
@@ -70,7 +68,7 @@ public class Card {
 
     /**
      * Returns the suit of this card.
-     * @returns the suit, which is one of the constants Card.SPADES, 
+     * @return the suit, which is one of the constants Card.SPADES, 
      * Card.HEARTS, Card.DIAMONDS, Card.CLUBS, or Card.JOKER
      */
     public int getSuit() {
@@ -148,4 +146,4 @@ public class Card {
     }
 
 
-} // end class Card
+}

@@ -1,10 +1,8 @@
-package panels; // Place this class with the other panels
+package panels; 
 
-/* State imports */
-import states.GameStates; // Game states
-import states.StatePanel; // Interface which defines what methods a panel must implement in order to be considered a stateful panel
+import states.GameStates; 
+import states.StatePanel; 
 
-/* Blackjack imports */
 import blackjack.Deck; // Deck for Blackjack
 
 /* Swing imports */

@@ -1,4 +1,4 @@
-package blackjack; // Package containing BlackJack game definition classes
+package blackjack;
 
 /**
  * An object of type Hand represents a hand of cards.  The
@@ -89,17 +89,17 @@ public class Hand {
     public void sortBySuit() {
         ArrayList<Card> newHand = new ArrayList<Card>();
         while (hand.size() > 0) {
-            int pos = 0;  // Position of minimal card.
-            Card c = hand.get(0);  // Minimal card.
-            for (int i = 1; i < hand.size(); i++) {
-                Card c1 = hand.get(i);
-                if ( c1.getSuit() < c.getSuit() ||
+            int pos = 0;  // Position of lowest value card in hand
+            Card c = hand.get(0);  // Lowest value card.
+            for (int i = 1; i < hand.size(); i++) { //finds the lowest suit in hand, then
+                Card c1 = hand.get(i);              //find the smallest value for the suit
+                if ( c1.getSuit() < c.getSuit() ||  //and selects it
                         (c1.getSuit() == c.getSuit() && c1.getValue() < c.getValue()) ) {
                     pos = i;
                     c = c1;
                 }
             }
-            hand.remove(pos);
+            hand.remove(pos); //removes card from hand and adds it to sorted hand
             newHand.add(c);
         }
         hand = newHand;
@@ -113,17 +113,17 @@ public class Hand {
     public void sortByValue() {
         ArrayList<Card> newHand = new ArrayList<Card>();
         while (hand.size() > 0) {
-            int pos = 0;  // Position of minimal card.
-            Card c = hand.get(0);  // Minimal card.
-            for (int i = 1; i < hand.size(); i++) {
-                Card c1 = hand.get(i);
-                if ( c1.getValue() < c.getValue() ||
+            int pos = 0;  // Position of lowest value card in hand
+            Card c = hand.get(0);  // lowest value card
+            for (int i = 1; i < hand.size(); i++) { //selects the smallest value card by 
+                Card c1 = hand.get(i);              //number, then the lowest suit of that 
+                if ( c1.getValue() < c.getValue() ||//number of the cards in the hand
                         (c1.getValue() == c.getValue() && c1.getSuit() < c.getSuit()) ) {
                     pos = i;
                     c = c1;
                 }
             }
-            hand.remove(pos);
+            hand.remove(pos);   //removes card from hand and adds it to sorted hand
             newHand.add(c);
         }
         hand = newHand;

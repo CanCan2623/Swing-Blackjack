@@ -1,54 +1,49 @@
 package panels;
 
-/* Blackjack imports */
 import blackjack.BlackjackHand;
 import blackjack.Card;
 
-/* State imports */
 import states.GameStates;
 import states.StatePanel;
 
-/* Swing imports */
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Victor on 24-Dec-15.
- *
  * This class defines the panel which displays the user's cards.
  */
 public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
-    BlackjackHand myHand; // The dealer's hand
-    CardPanel[] cardPanels = new CardPanel[5]; // An array of 5 card panels. These are used to display the cards in the hand
-    JLabel panLabel; // The label which indicates that this is the dealer's panel
-    GridBagConstraints gbc = new GridBagConstraints(); // Constraints for the GridBag layout
+    BlackjackHand myHand;                      // The Player's hand
+    CardPanel[] cardPanels = new CardPanel[5]; // used to display the cards in the hand
+    JLabel panLabel;                // Used to indicates that this is the Player's panel
+    GridBagConstraints gbc = new GridBagConstraints(); // Used to set look of UI
     GameStates curStat; // The current status of the panel
 
     /**
-     * Constructor
+     * Creates and sets the look of a new UserPanel
      */
     public UserPanel()
     {
-        /* Blackjack stuff */
-        myHand = new BlackjackHand(); // Create the dealer's hand
+        /*  Create the dealer's hand */
+        myHand = new BlackjackHand(); 
 
         /* Look and feel stuff */
         setLayout(new GridBagLayout()); // use a GridBag layout so that we can keep the label by itself, but align the 5 cards in a row
         setBackground(new Color(19, 168, 66)); // Use a dark green background
 
-        /** Create and show the label which lets the user know that this is the dealer's panel **/
-        panLabel = new JLabel("Your cards"); // Create the label with some text which indicates that this is the dealer's panel
-        panLabel.setForeground(Color.WHITE); // Red label to stand out
-        panLabel.setFont(new Font("Times New Roman", Font.BOLD, 20)); // Times New Roman, Bold, 20pt
+        /** Create and show the label which lets the user know that this is the Player's panel **/
+        panLabel = new JLabel("Your cards"); // Create the label with some text which indicates that this is the Player's panel
+        panLabel.setForeground(Color.WHITE);
+        panLabel.setFont(new Font("Times New Roman", Font.BOLD, 20)); 
 
         /* Set up constraints */
         gbc.gridx = 0; // Left-most cell
         gbc.gridy = 0; // Top-most cell
         gbc.fill = GridBagConstraints.HORIZONTAL; // Let it fill the container horizontally
-        gbc.weighty = 0.2; // Testing
+        gbc.weighty = 0.2;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        add(panLabel, gbc); // Add the label to the panel with the given constraints
+        add(panLabel, gbc);
 
         /* Set up constraints for the cards */
         gbc.gridy = 1; // The row beneath the label
@@ -57,14 +52,14 @@ public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
         gbc.gridwidth = 1;
 
         /* Card creation and display */
-        for (int i = 0; i < cardPanels.length; i++) // Create the card panels
-        {
-            gbc.gridx = i; // Use the current index as the x value
-            cardPanels[i] = new CardPanel(); // Create the panel
-            add(cardPanels[i], gbc); // Add the card panel to this panel with the given constraints
+        for (int i = 0; i < cardPanels.length; i++) // Creates the card panels
+        {                                           // using the index as the 
+            gbc.gridx = i;                          // x- coordinate
+            cardPanels[i] = new CardPanel(); 
+            add(cardPanels[i], gbc); 
         }
 
-        curStat = GameStates.BEFORESTART; // The state which the program starts in, as a game hasn't yet started
+        curStat = GameStates.BEFORESTART;
     }
 
     /**
@@ -73,18 +68,18 @@ public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
      */
     public GameStates getState()
     {
-        return curStat; // Return the current state
+        return curStat;
     }
 
     public void updatePanel(GameStates gs)
     {
-        curStat = gs; // Store the new state
+        curStat = gs; 
 
         switch (curStat)
         {
-            case BEFORESTART: // Clear the user's hand
+            case BEFORESTART: //clears the user's hand
             {
-                myHand.clear(); // Clear the hand object
+                myHand.clear(); 
 
                 /* Clear the card panels */
                 for (int i = 0; i < cardPanels.length; i++) // Loop through the card panels
@@ -95,23 +90,21 @@ public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
                 break;
             }
 
-            case GAMESTART: // Draw the 2 cards that were added to the user's hand
+            case GAMESTART: // Display the 2 cards that were added to the user's hand
             {
-                /* Draw the cards on the card panels */
-                for (int i = 0; i < 2; i++) // Loop through the first 2 card panels
+                for (int i = 0; i < 2; i++) 
                 {
-                    cardPanels[i].drawCard(); // Draw the card
+                    cardPanels[i].drawCard();
                 }
 
                 break;
             }
 
-            case UHIT: // Draw the cards again, now that the user has hit
+            case UHIT: // Update cards being displayed, now that the user has hit
             {
-                /* Draw the cards on the card panels */
-                for (int i = 0; i < cardPanels.length; i++) // Loop through the card panels
+                for (int i = 0; i < cardPanels.length; i++) 
                 {
-                    cardPanels[i].drawCard(); // Draw the card
+                    cardPanels[i].drawCard(); 
                 }
 
                 break;
@@ -119,7 +112,6 @@ public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
 
             default:
             {
-                //System.out.println("UserPanel: current state = " + curStat);
                 break;
             }
         }
@@ -131,8 +123,9 @@ public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
      */
     public void addCard(Card aCard)
     {
-        myHand.addCard(aCard); // Add the card to the user's hand
-        cardPanels[myHand.getCardCount()-1].setCurCard(aCard); // Give the corresponding card panel a reference to the card, so that it can draw it
+        //adds a card to the user's hand and pudates the panels to display card to user
+        myHand.addCard(aCard); 
+        cardPanels[myHand.getCardCount()-1].setCurCard(aCard);
     }
 
     /**
@@ -141,7 +134,7 @@ public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
      */
     public int getHandValue()
     {
-        return myHand.getBlackjackValue(); // Return the value of the blackjack hand
+        return myHand.getBlackjackValue();
     }
 
     /**
@@ -150,7 +143,7 @@ public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
      */
     public int numCardsInHand()
     {
-        return myHand.getCardCount(); // Return the number of cards in the hand
+        return myHand.getCardCount();
     }
 
     /**
@@ -160,6 +153,7 @@ public class UserPanel extends JPanel implements StatePanel, PlayerPanel {
      */
     public void updatePanel(GameStates gs, int score)
     {
-        updatePanel(gs); // Call the other method which doesn't take a score
+        // updatePanel ignores score
+        updatePanel(gs);
     }
 }

@@ -1,4 +1,4 @@
-package blackjack; // Package containing BlackJack game definition classes
+package blackjack;
 
 public class BlackjackHand extends Hand {
 
@@ -9,39 +9,36 @@ public class BlackjackHand extends Hand {
     public int getBlackjackValue() {
 
         int val;      // The value computed for the hand.
-        boolean ace;  // This will be set to true if the
-        //   hand contains an ace.
+        boolean ace;  // This will be set to true if the hand contains an ace.
         int cards;    // Number of cards in the hand.
 
         val = 0;
         ace = false;
-        cards = getCardCount();  // (method defined in class Hand.)
+        cards = getCardCount();
 
+        //sums up the value of the cards in the hand
         for ( int i = 0;  i < cards;  i++ ) {
-            // Add the value of the i-th card in the hand.
-            Card card;    // The i-th card; 
-            int cardVal;  // The blackjack value of the i-th card.
+            Card card;
+            int cardVal;
             card = getCard(i);
             cardVal = card.getValue();  // The normal value, 1 to 13.
-            if (cardVal > 10) {
-                cardVal = 10;   // For a Jack, Queen, or King.
+            if (cardVal > 10) {         // In blackjack, the face cards have a
+                cardVal = 10;           // value of 10 instead of 11, 12, or 13
             }
-            if (cardVal == 1) {
-                ace = true;     // There is at least one ace.
+            if (cardVal == 1) { // As aces are special in blackjack, we check 
+                ace = true;     // if the hand contains one
             }
             val = val + cardVal;
         }
 
-        // Now, val is the value of the hand, counting any ace as 1.
-        // If there is an ace, and if changing its value from 1 to 
-        // 11 would leave the score less than or equal to 21,
-        // then do so by adding the extra 10 points to val. 
-
+        // In blackjack, an ace can have the value 1 or 11.  If there is an 
+        // ace, and if changing its value from 1 to 11 would leave the score 
+        // less than or equal to 21, then we increase it's current value to 11 
         if ( ace == true  &&  val + 10 <= 21 )
             val = val + 10;
 
         return val;
 
-    }  // end getBlackjackValue()
+    }
 
-} // end class BlackjackHand
+}
